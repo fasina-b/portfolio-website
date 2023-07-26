@@ -1,26 +1,47 @@
 <template>
-  <img alt="Vue logo" src="./assets/Profile_Image.jpg" style="width: 400px;">
-  <HelloWorld msg="Welcome to Bolus App"/>
+  <div>
+    <!-- Navigation Links -->
+    <button @click="goToHome">Home</button>
+    <button @click="goToAbout">About</button>
+
+    <!-- Render the current page content -->
+    <div v-if="currentPage === 'home'">
+      <Home />
+    </div>
+    <div v-else-if="currentPage === 'about'">
+      <About />
+    </div>
+    <div v-else>
+      <HelloWorld />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// Import the required components
+import Home from './views/Home.vue';
+import About from './views/About.vue';
+import HelloWorld from './components/HelloWorld.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Home,
+    About,
+    HelloWorld, // Include HelloWorld component
+  },
+  data() {
+    return {
+      currentPage: 'home', // Set the default page
+    };
+  },
+  methods: {
+    goToHome() {
+      this.currentPage = 'home'; // Change the currentPage to show Home
+    },
+    goToAbout() {
+      this.currentPage = 'about'; // Change the currentPage to show About
+    },
+    // Add methods for other pages as needed
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
